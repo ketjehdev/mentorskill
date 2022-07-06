@@ -47,10 +47,10 @@
     width: 60%;
 }
 
-.main .imgBx img {
+/* .main .imgBx svg {
     width: 80%;
     height: 80%;
-}
+} */
 
 @media (max-width: 780px) {
     .main {

@@ -22,11 +22,11 @@
         </a>
       </li>
 
-      {{-- kelas langganan --}}
+      {{-- kelas Kamu --}}
       <li class="nav-item">
-        <a class="nav-link" href="{{ route('kelas-langganan') }}">
-            <i class="menu-icon @if($title != 'Kelas Langganan') text-warning @endif mdi mdi-fire"></i>
-            <span class="menu-title">Kelas Langganan</span> 
+        <a class="nav-link" href="{{ route('kelas-kamu') }}">
+            <i class="menu-icon @if($title != 'Kelas Kamu') text-warning @endif mdi mdi-fire"></i>
+            <span class="menu-title">Kelas Kamu</span> 
         </a>
       </li>
       

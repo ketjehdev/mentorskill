@@ -55,18 +55,20 @@
                           <div class="col-md-6 col-lg-12 grid-margin stretch-card">
                             <div class="card card-rounded">
                               <div class="card-body pb-0"  style="height: 50vh; overflow: auto;">
-                                <h4 class="card-title card-title-dash mb-3">Kelas Langganan</h4>
+                                <h4 class="card-title card-title-dash mb-3">Kelas Kamu</h4>
                                 
-                                <a href="{{ route('kelas-langganan') }}" style="text-decoration: none;">
+                                <a href="{{ route('kelas-kamu') }}" style="text-decoration: none;">
+                                  @foreach ($list_kelas as $item)
                                   <div class="row">
                                     <div class="col-12 d-flex" style="border-bottom: 1px solid #ddd;">
-                                      <img src="{{ asset('img/mentorskil.png') }}" style="width: 40px; height: 40px;" class="rounded-circle my-2 mx-2">
+                                      <img src="{{ asset('img/magang/'.$item->gambar) }}" style="width: 40px; height: 40px;" class="rounded-circle my-2 mx-2">
                                       <div class="d-flex flex-column justify-content-center">
-                                        <h5>Pembelajaran Java untuk pemula</h5>
-                                        <h6 class="text-secondary">Neville</h6>
+                                        <h5>{{ $item->nama_kelas }}</h5>
+                                        <h6 class="text-secondary">{{ $item->mentor }}</h6>
                                       </div>
                                     </div>
-                                  </div>
+                                  </div>                           
+                                  @endforeach
                                 </a>
                               </div>
                             </div>

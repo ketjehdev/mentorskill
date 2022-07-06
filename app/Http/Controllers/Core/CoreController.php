@@ -14,8 +14,11 @@ class CoreController extends Controller
     // index
     public function index()
     {
-        $title = 'Dashboard';
-        return view('core.dashboard', compact('title'));
+        $data = [
+            'title' => 'Dashboard',
+            'list_kelas' => semuaKelas::all(),
+        ];
+        return view('core.dashboard', $data);
     }
 
 
@@ -30,12 +33,12 @@ class CoreController extends Controller
     }
 
     // kelasLangganan
-    public function kelasLangganan()
+    public function kelasKamu()
     {
         $ms_kelasLangganan = [
-            'title' => 'Kelas Langganan',
+            'title' => 'Kelas Kamu',
         ];
-        return view('core.kelasLangganan', $ms_kelasLangganan);
+        return view('core.kelasKamu', $ms_kelasLangganan);
     }
 
 

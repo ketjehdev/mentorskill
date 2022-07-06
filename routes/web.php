@@ -30,7 +30,7 @@ Route::middleware(['auth'])->group(function () {
 
     // academy
     route::get('/semua-kelas', [CoreController::class, 'semuaKelas'])->name('semua-kelas');
-    route::get('/kelas-langganan', [CoreController::class, 'kelasLangganan'])->name('kelas-langganan');
+    route::get('/kelas-kamu', [CoreController::class, 'kelasKamu'])->name('kelas-kamu');
     route::get('/kompetisi', [CoreController::class, 'kompetisi'])->name('kompetisi');
     route::get('/magang', [CoreController::class, 'magang'])->name('magang');
 
