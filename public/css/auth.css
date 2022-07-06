@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Anek+Latin:wght@200;300;400;500;600;700;800&display=swap');
+
+* {
+    font-family: 'Anek Latin', sans-serif;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.box-auth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.box-auth .auth  {
+    position: relative;
+    display: flex;
+    width: 75%;
+    border-radius: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.box-auth .auth .imgBox-auth {
+    width: 50%;
+    height: 100%;
+    border-radius: 10px 0 0 10px;
+}   
+
+.box-auth .auth .imgBox-auth img {
+    object-fit: contain;
+    width: 100%;
+    height: 74vh;
+    border-radius: 10px 0 0 10px;
+}
+
+.box-auth .auth form {
+    padding: 20px;
+    width: 50%;
+    height: 100%;
+    background: #fff;    
+    border-radius: 0 10px 10px 0;
+}
+
+@media (max-width: 900px) {
+    .box-auth .auth  {
+        top: 5em;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        width: 95%;
+    }
+
+    .box-auth .auth .imgBox-auth {
+        display: none;
+    }
+
+    .box-auth .auth form {
+        width: 100%;
+        border-radius: 10px;
+    }
+}
+
+@media (max-width: 750px) {
+    .box-auth .auth  {
+        top: 5em;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        width: 98%;
+    }
+
+    .box-auth .auth .imgBox-auth {
+        display: none;
+    }
+
+    .box-auth .auth form {
+        width: 100%;
+        border-radius: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .box-auth .auth  {
+        top: 5em;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        width: 92%;
+    }
+
+    .box-auth .auth .imgBox-auth {
+        display: none;
+    }
+
+    .box-auth .auth form {
+        width: 100%;
+        border-radius: 10px;
+    }
+}
+
+@media (max-width: 370px) {
+    .box-auth .auth  {
+        top: 5em;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        width: 95%;
+    }
+
+    .box-auth .auth .imgBox-auth {
+        display: none;
+    }
+
+    .box-auth .auth form {
+        width: 100%;
+        border-radius: 10px;
+    }
+}

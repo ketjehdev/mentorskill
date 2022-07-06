@@ -1,0 +1,23 @@
+.main .content {
+    top: 0;
+}
+@media (max-width: 780px) {
+    .main {
+        width: 100%;
+        flex-direction: column;
+    }
+    .main .content {
+        position: relative;
+        top: 9em;
+        width: 100%;
+        padding: 10px;
+        bottom: 0;
+    }
+}
+
+@media (max-width: 370px) {
+    .main .content {
+        width: 90%;
+        padding: 0;
+    }
+}
