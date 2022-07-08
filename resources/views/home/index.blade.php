@@ -1,6 +1,6 @@
 @include('templates.header')
 
-    {{-- main --}}    
+   {{-- main --}}    
     <div class="main">
         <img src="{{ asset('img/bg.jpg') }}" alt="" class="bg">
         <div class="content">
@@ -32,6 +32,35 @@
             <li>Dapatkan diskon menarik lainya</li>
           </ul>
           <button class="btn btn-warning">Lihat Selengkapnya</button>
+        </div>
+      </div>
+    </div>
+
+    {{-- banner --}}
+    <div class="container-fluid p-4 my-3">
+      <div class="row">
+        <div class="owl-carousel owl-theme">
+          <div class="item">
+              <img src="{{ asset('img/banner/2.png') }}" alt="" width="100%">
+          </div>
+          <div class="item">
+              <img src="{{ asset('img/banner/1.png') }}" alt="" width="100%">
+          </div>
+          <div class="item">
+              <img src="{{ asset('img/banner/3.png') }}" alt="" width="100%">
+          </div>
+          <div class="item">
+              <img src="{{ asset('img/banner/4.png') }}" alt="" width="100%">
+          </div>
+          <div class="item">
+              <img src="{{ asset('img/banner/5.png') }}" alt="" width="100%">
+          </div>
+          <div class="item">
+              <img src="{{ asset('img/banner/6.png') }}" alt="" width="100%">
+          </div>
+          <div class="item">
+              <img src="{{ asset('img/banner/7.png') }}" alt="" width="100%">
+          </div>
         </div>
       </div>
     </div>
@@ -71,11 +100,65 @@
           <img src="{{ asset('img/profesional.png') }}" style="width: 30%" alt="">
           <h5 class="mt-2">Profesional</h5>
           <p class="text-center">
-            Para Mentor yang profesional dan berpengalamn
+            Para Mentor yang profesional dan berpengalaman
           </p>
         </div>
       
       </div>
     </div>
+
+    <div class="container-fluid mt-2">
+      <div class="row justify-content-center align-items-center mb-3 mt-1 mx-2">
+        <div class="col-lg-3 col-md-12 col-sm-12">
+          <img src="{{ asset('img/superhero.svg') }}" data-aos="zoom-in-right" style="width: 100%;height: 100%;" alt="">
+        </div>
+        <div class="col-lg-8 col-md-12 col-sm-12" data-aos="zoom-in">
+          <h2 class="text-center" style="font-weight: bold">
+             Kata mereka tentang MentorSkill
+          </h2>
           
+          <div class="row justify-content-center" style="gap: 10px">
+            <div class="owl-carousel owl-theme">
+              <div class="item">
+                <div class="card" style="height: 50vh; overflow-y: auto;">
+                  <div class="card-body d-flex flex-column align-items-center">
+                    <img src="{{ asset('img/profils/saske.jpg') }}" class="rounded-circle" style="width: 90px; height: 90px">
+                    <h5 class="mt-2 mb-0">Neville Jeremy</h5>
+                    <p>SMK TELKOM 1 MEDAN</p>
+                    <span class="text-center">
+                      <q><em>
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum iure delectus corrupti at reiciendis nobis quos hic deserunt labore dolor itaque, ut autem alias, inventore illo. Reiciendis optio officiis placeat.
+                      </q></em>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid text-light mt-5 bg-info" style="border-bottom: 1px solid #aaaa">
+      <div class="row justify-content-center align-items-center pt-4 mx-2">
+        <div class="col-lg-6 col-md-12 col-sm-12" data-aos="zoom-in">
+          <h1 style="font-weight: bold">
+             Masih ada pertanyaan mengenai MentorSkill?
+          </h1>
+          <h5>Hubungi kami melalui via WhatsApp.</h5>
+          <a href="https://api.whatsapp.com/send?phone=6281324511570&text=Hai%20admin%20saya%20mau%20tanya%20terkait%20MentorSkill😀">
+            <button class="btn text-dark" style="background: #fff">
+              Hubungi kami
+            </button>
+          </a>
+
+        </div>
+        <div class="col-lg-5 col-md-12 col-sm-12">
+          <img src="{{ asset('img/contact.svg') }}" data-aos="zoom-in-left" style="width: 100%;height: 100%;" alt="">
+        </div>
+      </div>
+    </div>
+    
 @include('templates.footer')
