@@ -1,0 +1,293 @@
+  // SIGNER
+    public function signer()
+    {
+        return view('micro.signer.page1');
+    }
+
+    // SIGNER REPORT DETAIL
+    public function signer_report_detail($uker)
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $today = date('Y-m-d', strtotime('today'));
+        if (!Micro::all()->isEmpty()) {
+            /* $data = Micro::find($uker); */
+            $data = DB::table('micro')
+                ->where('kantor_cabang', '=', auth()->user()->psadesc)
+                ->where('uker', '=', $uker)
+                ->select(
+                    'date',
+                    'inputer',
+                    'uker',
+                    'debitur1',
+                    'plafon1',
+                    'debitur2',
+                    'plafon2',
+                    'debitur3',
+                    'plafon3',
+                    'debitur4',
+                    'plafon4',
+                    'debitur5',
+                    'setoran',
+                    'premiA',
+                    'premiB',
+                    'merchant'
+                )
+                ->groupBy(['uker', 'date'])
+                ->get();
+        }
+
+        if (Micro::all()->isEmpty()) {
+            return view('micro.signer.page2a');
+        } else {
+            return view('micro.signer.page2a', compact('data'));
+        }
+    }
+
+    // LIST REPORT SIGNER
+    public function list_report_signer()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $today = date('Y-m-d', strtotime('today'));
+        $updated_at_push_db = Micro::pluck('updated_at_push')->last();
+
+        if (!Micro::all()->isEmpty()) {
+            $datas = [
+                'micro' => DB::table('micro')
+                    ->where('kantor_cabang', '=', auth()->user()->psadesc)
+                    ->where('updated_at', '=', $today)
+                    ->where('status', '=', 'Verification')
+                    ->orWhere('kantor_cabang', '=', auth()->user()->psadesc, 'and', 'status', '=', 'Push')
+                    ->select(
+                        'date',
+                        'uker',
+                        DB::raw('sum(debitur1) as debitur1'),
+                        DB::raw('sum(debitur2) as debitur2'),
+                        DB::raw('sum(debitur3) as debitur3'),
+                        DB::raw('sum(debitur4) as debitur4'),
+                        DB::raw('sum(debitur5) as debitur5'),
+                        DB::raw('sum(debitur6) as debitur6'),
+                        DB::raw('sum(debitur7) as debitur7'),
+                        DB::raw('sum(report_other1) as report_other1'),
+                        DB::raw('sum(report_other2) as report_other2'),
+                        DB::raw('sum(debitur1) as debitur1'),
+                        DB::raw('sum(setoran) as setoran'),
+                        DB::raw('sum(plafon1) as plafon1'),
+                        DB::raw('sum(plafon2) as plafon2'),
+                        DB::raw('sum(plafon3) as plafon3'),
+                        DB::raw('sum(plafon4) as plafon4'),
+                        DB::raw('sum(premiA) as premiA'),
+                        DB::raw('sum(premiB) as premiB'),
+                        DB::raw('sum(merchant) as merchant'),
+                    )
+                    ->groupBy(['uker', 'date'])
+                    ->get(),
+
+                'debitur1' => Micro::where('kantor_cabang', '=', auth()->user()->psadesc)->where('updated_at', '=', $today)->where('status', '=', 'Verification')->orWhere('kantor_cabang', '=', auth()->user()->psadesc, 'and', 'status', '=', 'Push')->sum('debitur1'),
+                'plafon1' => Micro::where('kantor_cabang', '=', auth()->user()->psadesc)->where('updated_at', '=', $today)->where('status', '=', 'Verification')->orWhere('kantor_cabang', '=', auth()->user()->psadesc, 'and', 'status', '=', 'Push')->sum('plafon1'),
+                'debitur2' => Micro::where('kantor_cabang', '=', auth()->user()->psadesc)->where('updated_at', '=', $today)->where('status', '=', 'Verification')->orWhere('kantor_cabang', '=', auth()->user()->psadesc, 'and', 'status', '=', 'Push')->sum('debitur2'),
+                'plafon2' => Micro::where('kantor_cabang', '=', auth()->user()->psadesc)->where('updated_at', '=', $today)->where('status', '=', 'Verification')->orWhere('kantor_cabang', '=', auth()->user()->psadesc, 'and', 'status', '=', 'Push')->sum('plafon2'),
+                'debitur3' => Micro::where('kantor_cabang', '=', auth()->user()->psadesc)->where('updated_at', '=', $today)->where('status', '=', 'Verification')->orWhere('kantor_cabang', '=', auth()->user()->psadesc, 'and', 'status', '=', 'Push')->sum('debitur3'),
+                'plafon3' => Micro::where('kantor_cabang', '=', auth()->user()->psadesc)->where('updated_at', '=', $today)->where('status', '=', 'Verification')->orWhere('kantor_cabang', '=', auth()->user()->psadesc, 'and', 'status', '=', 'Push')->sum('plafon3'),
+                'debitur4' => Micro::where('kantor_cabang', '=', auth()->user()->psadesc)->where('updated_at', '=', $today)->where('status', '=', 'Verification')->orWhere('kantor_cabang', '=', auth()->user()->psadesc, 'and', 'status', '=', 'Push')->sum('debitur4'),
+                'plafon4' => Micro::where('kantor_cabang', '=', auth()->user()->psadesc)->where('updated_at', '=', $today)->where('status', '=', 'Verification')->orWhere('kantor_cabang', '=', auth()->user()->psadesc, 'and', 'status', '=', 'Push')->sum('plafon4'),
+                'debitur5' => Micro::where('kantor_cabang', '=', auth()->user()->psadesc)->where('updated_at', '=', $today)->where('status', '=', 'Verification')->orWhere('kantor_cabang', '=', auth()->user()->psadesc, 'and', 'status', '=', 'Push')->sum('debitur5'),
+                'setoran' => Micro::where('kantor_cabang', '=', auth()->user()->psadesc)->where('updated_at', '=', $today)->where('status', '=', 'Verification')->orWhere('kantor_cabang', '=', auth()->user()->psadesc, 'and', 'status', '=', 'Push')->sum('setoran'),
+                'debitur6' => Micro::where('kantor_cabang', '=', auth()->user()->psadesc)->where('updated_at', '=', $today)->where('status', '=', 'Verification')->orWhere('kantor_cabang', '=', auth()->user()->psadesc, 'and', 'status', '=', 'Push')->sum('debitur6'),
+                'premiA' => Micro::where('kantor_cabang', '=', auth()->user()->psadesc)->where('updated_at', '=', $today)->where('status', '=', 'Verification')->orWhere('kantor_cabang', '=', auth()->user()->psadesc, 'and', 'status', '=', 'Push')->sum('premiA'),
+                'debitur7' => Micro::where('kantor_cabang', '=', auth()->user()->psadesc)->where('updated_at', '=', $today)->where('status', '=', 'Verification')->orWhere('kantor_cabang', '=', auth()->user()->psadesc, 'and', 'status', '=', 'Push')->sum('debitur7'),
+                'premiB' => Micro::where('kantor_cabang', '=', auth()->user()->psadesc)->where('updated_at', '=', $today)->where('status', '=', 'Verification')->orWhere('kantor_cabang', '=', auth()->user()->psadesc, 'and', 'status', '=', 'Push')->sum('premiB'),
+                'merchant' => Micro::where('kantor_cabang', '=', auth()->user()->psadesc)->where('updated_at', '=', $today)->where('status', '=', 'Verification')->orWhere('kantor_cabang', '=', auth()->user()->psadesc, 'and', 'status', '=', 'Push')->sum('merchant'),
+                'report_other1' => Micro::where('kantor_cabang', '=', auth()->user()->psadesc)->where('updated_at', '=', $today)->where('status', '=', 'Verification')->orWhere('kantor_cabang', '=', auth()->user()->psadesc, 'and', 'status', '=', 'Push')->sum('report_other1'),
+                'report_other2' => Micro::where('kantor_cabang', '=', auth()->user()->psadesc)->where('updated_at', '=', $today)->where('status', '=', 'Verification')->orWhere('kantor_cabang', '=', auth()->user()->psadesc, 'and', 'status', '=', 'Push')->sum('report_other2'),
+                'updated_status_push' => date('ymd', strtotime($updated_at_push_db)),
+                'status' => Micro::where('kantor_cabang', '=', auth()->user()->psadesc)->pluck('status')->last(),
+                'pn_signer' => Micro::where('kantor_cabang', '=', auth()->user()->psadesc)->pluck('pn_signer')->last(),
+                'today_sign' => date('ymd', strtotime($today)),
+                'pusher' => Micro::where('kantor_cabang', '=', auth()->user()->psadesc)->pluck('pusher')->last(),
+            ];
+        }
+
+        if (Micro::all()->isEmpty()) {
+            return view('micro.signer.page2');
+        } else {
+            return view('micro.signer.page2', $datas);
+        }
+    }
+
+    public function push()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $today = date('Y-m-d', strtotime('today'));
+
+        DB::table('micro')->where('pn_signer', null)->where('kantor_cabang', '=', auth()->user()->psadesc)->where('status', 'Verification')->where('pusher', null)->where('updated_at_push', null)->update(array('pn_signer' => auth()->user()->pn, 'status' => 'Push', 'pusher' => auth()->user()->completename, 'updated_at_push' => $today));
+        return redirect('/microSignerList');
+    }
+
+    public function rekap_report_signer()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $today = date('ymd', strtotime('today'));
+
+        if (!Micro::all()->isEmpty()) {
+            $data = DB::table('micro')
+                ->where('kantor_cabang', '=', auth()->user()->psadesc)
+                ->where('exp_day', '>=', $today)
+                ->where('status', '=', 'Push')
+                ->select(
+                    'date',
+                    'inputer',
+                    'validator',
+                    'pusher',
+                    'uker',
+                    'laporan1',
+                    'laporan2',
+                    'laporan3',
+                    'laporan4',
+                    'laporan5',
+                    'laporan6',
+                    'laporan7',
+                    'laporan8',
+                    'laporan9',
+                    'laporan10',
+                    DB::raw('sum(debitur1) as debitur1'),
+                    DB::raw('sum(debitur2) as debitur2'),
+                    DB::raw('sum(debitur3) as debitur3'),
+                    DB::raw('sum(debitur4) as debitur4'),
+                    DB::raw('sum(debitur5) as debitur5'),
+                    DB::raw('sum(debitur6) as debitur6'),
+                    DB::raw('sum(debitur7) as debitur7'),
+                    DB::raw('sum(report_other1) as report_other1'),
+                    DB::raw('sum(report_other2) as report_other2'),
+                    DB::raw('sum(setoran) as setoran'),
+                    DB::raw('sum(plafon1) as plafon1'),
+                    DB::raw('sum(plafon2) as plafon2'),
+                    DB::raw('sum(plafon3) as plafon3'),
+                    DB::raw('sum(plafon4) as plafon4'),
+                    DB::raw('sum(premiA) as premiA'),
+                    DB::raw('sum(premiB) as premiB'),
+                    DB::raw('sum(merchant) as merchant'),
+                )
+                ->orderBy('id', 'DESC')
+                ->groupBy(['uker', 'inputer', 'validator', 'pusher', 'date', 'laporan1', 'laporan2', 'laporan3', 'laporan4', 'laporan5', 'laporan6', 'laporan7', 'laporan8', 'laporan9', 'laporan10'])
+                ->paginate(1);
+        }
+
+        if (Micro::all()->isEmpty()) {
+            return view('micro.signer.page3');
+        } else {
+            return view('micro.signer.page3', compact('data'));
+        }
+    }
+
+    public function rekap_Mreport_signer()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $today = date('ymd', strtotime('today'));
+
+        if (!Micro::all()->isEmpty()) {
+            $data = DB::table('micro')
+                ->where('kantor_cabang', '=', auth()->user()->psadesc)
+                ->where('exp_day', '<', $today)
+                ->where('exp_week', '>=', $today)
+                ->where('status', '=', 'Push')
+                ->select(
+                    'date',
+                    'inputer',
+                    'validator',
+                    'pusher',
+                    'uker',
+                    'laporan1',
+                    'laporan2',
+                    'laporan3',
+                    'laporan4',
+                    'laporan5',
+                    'laporan6',
+                    'laporan7',
+                    'laporan8',
+                    'laporan9',
+                    'laporan10',
+                    DB::raw('sum(debitur1) as debitur1'),
+                    DB::raw('sum(debitur2) as debitur2'),
+                    DB::raw('sum(debitur3) as debitur3'),
+                    DB::raw('sum(debitur4) as debitur4'),
+                    DB::raw('sum(debitur5) as debitur5'),
+                    DB::raw('sum(debitur6) as debitur6'),
+                    DB::raw('sum(debitur7) as debitur7'),
+                    DB::raw('sum(report_other1) as report_other1'),
+                    DB::raw('sum(report_other2) as report_other2'),
+                    DB::raw('sum(setoran) as setoran'),
+                    DB::raw('sum(plafon1) as plafon1'),
+                    DB::raw('sum(plafon2) as plafon2'),
+                    DB::raw('sum(plafon3) as plafon3'),
+                    DB::raw('sum(plafon4) as plafon4'),
+                    DB::raw('sum(premiA) as premiA'),
+                    DB::raw('sum(premiB) as premiB'),
+                    DB::raw('sum(merchant) as merchant'),
+                )
+                ->orderBy('id', 'DESC')
+                ->groupBy(['uker', 'inputer', 'validator', 'pusher', 'date', 'laporan1', 'laporan2', 'laporan3', 'laporan4', 'laporan5', 'laporan6', 'laporan7', 'laporan8', 'laporan9', 'laporan10'])
+                ->paginate(1);
+        }
+
+        if (Micro::all()->isEmpty()) {
+            return view('micro.signer.page3a');
+        } else {
+            return view('micro.signer.page3a', compact('data'));
+        }
+    }
+
+    public function rekap_Breport_signer()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $today = date('ymd', strtotime('today'));
+
+        if (!Micro::all()->isEmpty()) {
+            $data = DB::table('micro')
+                ->where('kantor_cabang', '=', auth()->user()->psadesc)
+                ->where('exp_week', '<', $today)
+                ->where('status', '=', 'Push')
+                ->select(
+                    'date',
+                    'inputer',
+                    'validator',
+                    'pusher',
+                    'uker',
+                    'laporan1',
+                    'laporan2',
+                    'laporan3',
+                    'laporan4',
+                    'laporan5',
+                    'laporan6',
+                    'laporan7',
+                    'laporan8',
+                    'laporan9',
+                    'laporan10',
+                    DB::raw('sum(debitur1) as debitur1'),
+                    DB::raw('sum(debitur2) as debitur2'),
+                    DB::raw('sum(debitur3) as debitur3'),
+                    DB::raw('sum(debitur4) as debitur4'),
+                    DB::raw('sum(debitur5) as debitur5'),
+                    DB::raw('sum(debitur6) as debitur6'),
+                    DB::raw('sum(debitur7) as debitur7'),
+                    DB::raw('sum(report_other1) as report_other1'),
+                    DB::raw('sum(report_other2) as report_other2'),
+                    DB::raw('sum(setoran) as setoran'),
+                    DB::raw('sum(plafon1) as plafon1'),
+                    DB::raw('sum(plafon2) as plafon2'),
+                    DB::raw('sum(plafon3) as plafon3'),
+                    DB::raw('sum(plafon4) as plafon4'),
+                    DB::raw('sum(premiA) as premiA'),
+                    DB::raw('sum(premiB) as premiB'),
+                    DB::raw('sum(merchant) as merchant'),
+                )
+                ->orderBy('id', 'DESC')
+                ->groupBy(['uker', 'inputer', 'validator', 'pusher', 'date', 'laporan1', 'laporan2', 'laporan3', 'laporan4', 'laporan5', 'laporan6', 'laporan7', 'laporan8', 'laporan9', 'laporan10'])
+                ->paginate(1);
+        }
+
+        if (Micro::all()->isEmpty()) {
+            return view('micro.signer.page3b');
+        } else {
+            return view('micro.signer.page3b', compact('data'));
+        }
+    }

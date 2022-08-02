@@ -59,6 +59,7 @@ class RegisterController extends Controller
             'email' => strtolower($request->email),
             'password' => bcrypt($request->password),
             'role' => 'student',
+            'id_bloger' => null,
         ]);
 
         // event(new Registered($user));

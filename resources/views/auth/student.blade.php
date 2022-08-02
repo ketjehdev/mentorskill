@@ -21,7 +21,7 @@
 
                     <div class="col-lg-6 col-md-12 col-sm-12">
                         <label for="nama_belakang">Nama Belakang :</label>
-                        <input type="text" name="nama_belakang" id="nama_belakang" placeholder="Nama belakang" class="form-control @error('nama_depan') is-invalid @enderror">
+                        <input type="text" name="nama_belakang" id="nama_belakang" value="{{ old('nama_belakang') }}" placeholder="Nama belakang" class="form-control @error('nama_depan') is-invalid @enderror">
                         @error('nama_belakang')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -41,13 +41,13 @@
                 @enderror
                 
                 <label for="password">Password :</label>
-                <input type="password" value="{{ old('password') }}" class="form-control @error('password') is-invalid @enderror mb-1" name="password" id="password"  placeholder="Masukkan password">
+                <input type="password" class="form-control @error('password') is-invalid @enderror mb-1" name="password" id="password"  placeholder="Masukkan password">
                 @error('password')
                     <span class="text-danger d-block">{{ $message }}</span>
                 @enderror
 
                 <label for="cpassword">Konfirmasi Password :</label>
-                <input value="{{ old('cpassword') }}" type="password" class="form-control @error('cpassword') is-invalid @enderror" name="cpassword" id="cpassword"  placeholder="Konfirmasi password">
+                <input type="password" class="form-control @error('cpassword') is-invalid @enderror" name="cpassword" id="cpassword"  placeholder="Konfirmasi password">
                 @error('cpassword')
                     <span class="text-danger d-block">{{ $message }}</span>
                 @enderror

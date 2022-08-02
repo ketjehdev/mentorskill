@@ -11,8 +11,11 @@ class HomeController extends Controller
     // index
     public function index()
     {
-        $title = 'Home';
-        return view('home.index', compact('title'));
+        $data = [
+            'title' => 'Home',
+            'kelas' => semuaKelas::all(),
+        ];
+        return view('home.index', $data);
     }
 
     public function magang()

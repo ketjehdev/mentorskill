@@ -25,11 +25,11 @@
                 @endif
 
                 <label for="email">Email :</label>
-                <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" id="email"  placeholder="example@gmail.com" @if(!Cookie::has('email')) autofocus @endif value="{{ old('email') }}@if(Cookie::has('email')){{Cookie::get('email')}}@endif">
+                <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" id="email"  placeholder="example@gmail.com" @if(!Cookie::has('email')) autofocus @endif value="@if(Cookie::has('email')){{Cookie::get('email')}}@endif">
                 @error('email')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
-                <br>
+                <br>    
                 
                 <label for="password">Password :</label>
                 <input type="password" autofocus class="form-control @error('password') is-invalid @enderror" name="password" id="password" placeholder="Masukkan password kamu">
