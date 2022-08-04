@@ -22,7 +22,7 @@
                       <div class="col-lg-5 d-flex flex-column">
                         <div class="row flex-grow">
                           <div class="col-12 col-lg-4 col-lg-12 grid-margin stretch-card">
-                            <div class="card card-rounded alert-primary" style="border-top: 4px solid navy">
+                            <div class="card card-rounded alert-primary">
                               <div class="card-body d-flex flex-column align-items-center">
                                 <h4 class="mb-3"><strong>Profilku</strong></h4>
                                 <a href="{{ route('profil') }}" class="text-center">
@@ -30,7 +30,13 @@
                                 </a>
 
                                 <div class="d-flex flex-column mt-3 mb-0">
-                                  <h4 class="text-center mb-0" style="font-weight: bold;">{{ auth()->user()->username}} @if(auth()->user()->role == 'admin') <span class="text-success mb-0"><i class="mdi mdi-check-circle"></i></span> @endif</h4>
+                                
+                                <a href="{{ route('profil') }}">
+                                  <button class="btn mb-0 border-0">
+                                    <h4 class="text-center mb-0" style="font-weight: bold;">{{ auth()->user()->username}} @if(auth()->user()->role == 'admin') <span class="text-success mb-0"><i class="mdi mdi-check-circle"></i></span> @endif </h4>
+                                  </button>  
+                                </a>
+
                                   <p>{{ auth()->user()->email }}</p>
                                 </div>
 
@@ -64,7 +70,7 @@
                       <div class="col-lg-7 d-flex flex-column">
                         <div class="row flex-grow">
                           <div class="col-md-6 col-lg-12 grid-margin stretch-card">
-                            <div class="card card-rounded alert-warning" style="border-top:4px solid navy">
+                            <div class="card card-rounded alert-warning">
                               <div class="card-body pb-0"  style="height: 50vh; overflow: auto;">
                                 <h4 class="card-title card-title-dash mb-3">
                                   @if (auth()->user()->role == 'student')

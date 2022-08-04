@@ -1,0 +1,19 @@
+p img {
+    width: 10%;
+    margin: 10px;
+    text-align: center;
+    object-fit: cover;
+}
+@media (max-width: 480px) {
+    p img {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+@media (max-width: 370px) {
+    p img {
+        width: 10%;
+        background: red;    
+    }
+}

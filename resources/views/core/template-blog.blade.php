@@ -20,7 +20,7 @@
                 
                 <div class="card-body">
                     
-                <img src="{{ asset('storage/uploads/'.$data->gambar) }}" style="width: 100%; margin-right: 10px" alt="">
+                {{-- <img src="{{ asset('storage/uploads/'.$data->gambar) }}" alt=""> --}}
                 @php
                     @header('Content-type: text/html; charset=utf-8');
                     echo $data->deskripsi;
@@ -29,5 +29,4 @@
             </div>
         </div>
     </div>
-
-@include('templates.footer')
+@include('templates.footer')    

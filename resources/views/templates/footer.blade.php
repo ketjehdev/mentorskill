@@ -1,12 +1,7 @@
-<style>
-    a {
-        text-decoration: none;
-    }
-</style>
-    <footer class="container-fluid bottom-0" style="margin-top: @if($title == 'Login') 3em; @elseif($title == 'Student' && auth()->user() == false) 8em; @endif @if(auth()->user() == true && $title == 'Student') 0; @endif">
+<footer class="container-fluid bottom-0" style="margin-top: @if($title == 'Login') 3em; @elseif($title == 'Student' && auth()->user() == false) 8em; @elseif($title == 'Mentor') 10em @endif @if(auth()->user() == true && $title == 'Student') 0; @endif">
         <div class="row bg-dark py-5 text-light d-flex justify-content-evenly">
             <div class="col-lg-3 col-md-12 col-sm-12">
-                <img src="{{ asset('img/mentorskil logo2.png') }}" height="65" alt="Mentorskill Logo" class="mb-3">
+                <img src="{{ asset('img/mentorskil logo2.png') }}" height="65" alt="Mentorskill Logo" class="mb-3" style="@if($title=='Blog Templates') width:80% @endif">
                 <h4>PT Hafara Aqiba Nusantara</h4>
                 <p>Jl. Cibolerang, Cinunuk, Cileunyi, Kota Bandung, Jawa Barat 40614</p>
             </div>
@@ -36,7 +31,7 @@
                 <h4>Support</h4>
                 <p class="mb-0">FAQ</p>
                 <p class="mb-0">Hubungi Kami</p>
-            </div>
+             </div>
 
             </div>
         </div>

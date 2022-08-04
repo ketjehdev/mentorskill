@@ -26,62 +26,71 @@
   * {
     font-family: 'Nunito', sans-serif;
   }
+  a {
+    text-decoration: none;
+  }
 </style>
 
 <body>
     <!-- navbar -->
     <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row" style="background: #fff; border-top: 4px solid #2379ca; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
-      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start" style="background: #fff">
-        <div class="me-3">
-          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-bs-toggle="minimize">
-            <span class="icon-menu"></span>
-          </button>
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start" style="background: #fff">
+          <div class="me-3">
+            <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-bs-toggle="minimize">
+              <span class="icon-menu"></span>
+            </button>
+          </div>
+          <div>
+            <a class="navbar-brand brand-logo" href="{{ route('home') }}">
+              <img src="{{ asset('img/mentorskil logo2.png') }}" alt="logo" />
+            </a>
+            <a class="navbar-brand brand-logo-mini d-lg-none" href="{{ route('profil') }}">
+              <img src="{{ asset('img/profils/'.auth()->user()->profil) }}" style="height: 100%; width: 100%; border: 1px solid navy; border-radius: 100%" alt="logo" />
+            </a>
+          </div>
+          
         </div>
-        <div>
-          <a class="navbar-brand brand-logo" href="{{ route('home') }}">
-            <img src="{{ asset('img/mentorskil logo2.png') }}" alt="logo" />
-          </a>
-          <a class="navbar-brand brand-logo-mini  d-lg-none" href="{{ route('profil') }}">
-            <img src="{{ asset('img/profils/'.auth()->user()->profil) }}" style="width: 100%; border: 1px solid navy; border-radius: 100%" alt="logo" />
-          </a>
-        </div>
-      </div>
-      <div class="navbar-menu-wrapper d-flex align-items-top" style="background: #fff"> 
-        <ul class="navbar-nav">
-          <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
-            <h3><span class="text-black fw-bold">{{ $title }}</span></h3>
-          </li>
-        </ul>
-        <ul class="navbar-nav ms-auto">
-          @if (auth()->user()->role == 'student')
-            @if ($title != 'Semua Kelas')
-              <li class="nav-item">
-                <a href="{{ route('semua-kelas') }}">
-                  <button class="btn btn-primary">&plus; Join kelas</button>
-                </a>
-              </li>
+        
+        <div class="navbar-menu-wrapper d-flex align-items-top" style="background: #fff"> 
+          <ul class="navbar-nav">
+            <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
+              <h3><span class="text-black fw-bold">{{ $title }}</span></h3>
+            </li>
+          </ul>
+
+          <ul class="navbar-nav ms-auto">
+            @if (auth()->user()->role == 'student')
+              @if ($title != 'Semua Kelas')
+                <li class="nav-item">
+                  <a href="{{ route('semua-kelas') }}">
+                    <button class="btn btn-primary">&plus; Join kelas</button>
+                  </a>
+                </li>
+              @endif
             @endif
-          @endif
+  
+            <!-- profil -->
+            <li class="nav-item dropdown d-none d-lg-block user-dropdown">
+              <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                <img class="img-xs rounded-circle" src="{{ asset('img/profils/'.auth()->user()->profil) }}" alt="Profile image" style="border: 1.3px solid blue"> <span>{{ auth()->user()->username }} @if(auth()->user()->role == 'admin') <span class="text-success mb-0"><i class="mdi mdi-check-circle"></i></span> @endif</span> </a>
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+                
+                <div class="dropdown-header text-center">
+                  <p class="mb-1 mt-3 font-weight-semibold">{{ auth()->user()->username }}</p>
+                  <p class="fw-light text-muted mb-0">{{ auth()->user()->email }}</p>
+                </div>
+  
+                <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> Profilku <span class="badge badge-pill badge-danger">1</span></a>
+                <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-help-circle-outline text-primary me-2"></i> FAQ</a>
+                <a href="{{ route('logout') }}" class="dropdown-item text-danger mb-0"><i class="dropdown-item-icon text-danger mdi mdi-power text-primary me-2"></i>Keluar</a> 
+            </li>
+            
+          </ul>
+          
+          
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center position-relative" type="button" data-bs-toggle="offcanvas" style="top: 8px">
+              <span class="mdi mdi-menu" title="navbar-toggler" style="font-size: 25px"></span>
+          </button>
 
-          <!-- profil -->
-          <li class="nav-item dropdown d-none d-lg-block user-dropdown">
-            <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-              <img class="img-xs rounded-circle" src="{{ asset('img/profils/'.auth()->user()->profil) }}" alt="Profile image" style="border: 1.3px solid blue"> <span>{{ auth()->user()->username }} @if(auth()->user()->role == 'admin') <span class="text-success mb-0"><i class="mdi mdi-check-circle"></i></span> @endif</span> </a>
-              <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
-              
-              <div class="dropdown-header text-center">
-                <p class="mb-1 mt-3 font-weight-semibold">{{ auth()->user()->username }}</p>
-                <p class="fw-light text-muted mb-0">{{ auth()->user()->email }}</p>
-              </div>
-
-              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> Profilku <span class="badge badge-pill badge-danger">1</span></a>
-              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-help-circle-outline text-primary me-2"></i> FAQ</a>
-              <a href="{{ route('logout') }}" class="dropdown-item text-danger mb-0"><i class="dropdown-item-icon text-danger mdi mdi-power text-primary me-2"></i>Keluar</a> 
-          </li>
-
-        </ul>
-        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-bs-toggle="offcanvas">
-            <span class="mdi mdi-menu" title="navbar-toggler" style="font-size: 30px"></span>
-        </button>
-      </div>
-    </nav>
+        </div>
+      </nav>

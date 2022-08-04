@@ -22,6 +22,11 @@
                         {{ session('loginError') }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
+                @elseif(session()->has('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert" style="width: 100%">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
                 @endif
 
                 <label for="email">Email :</label>

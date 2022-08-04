@@ -53,6 +53,34 @@ class CoreController extends Controller
         return redirect('/dashboard#users')->with('success', 'Warning!⚠️ Satu akun baru saja berhasil di aktifkan kembali!');
     }
 
+    // verifikasi trainer
+    public function verifikasiMentor()
+    {
+        $data = [
+            'title' => 'Verifikasi Mentor',
+            'mentor' => User::where('role', '=', 'trainer')->get(),
+        ];
+
+        return view('core.verifikasiMentor', $data);
+    }
+
+    // hapus trainer
+    public function hapus_trainer($crud_token)
+    {
+        $data = User::where('role', '=', 'trainer')->find($crud_token);
+        $data->delete();
+        return redirect('/verifikasiMentor');
+    }
+
+    // semua user
+    public function semuaUser()
+    {
+        $data = [
+            'title' => 'Semua User',
+        ];
+        return view('core.semuaUser', $data);
+    }
+
     // semuaKelas
     public function semuaKelas()
     {
@@ -66,6 +94,13 @@ class CoreController extends Controller
         if (auth()->user()->role == 'admin') {
             $ms_semuaKelas = [
                 'title' => 'Management Kelas',
+                'list_semua_kelas' => semuaKelas::all(),
+            ];
+        }
+
+        if (auth()->user()->role == 'trainer') {
+            $ms_semuaKelas = [
+                'title' => 'Kelola Kelas',
                 'list_semua_kelas' => semuaKelas::all(),
             ];
         }
@@ -156,8 +191,6 @@ class CoreController extends Controller
 
         $data->save();
         return redirect('blogs')->with('success', 'Blog berhasil di posting!');
-
-        $this->idGambar++;
     }
 
     public function upload(Request $request)
@@ -199,18 +232,29 @@ class CoreController extends Controller
         return view('core.profil', compact('title'));
     }
 
-    public function loadImage()
-    {
-        return view('cropImage');
-    }
-    public function cropImg()
-    {
-        $data = $_POST['image'];
-        $image_array_1 = explode(";", $data);
-        $image_array_2 = explode(",", $image_array_1[1]);
-        $data = base64_decode($image_array_2[1]);
-        $image_name = 'upload/' . time() . '.png';
-        file_put_contents($image_name, $data);
-        echo $image_name;
-    }
+    // public function loadImage()
+    // {
+    //     return view('crop-image-upload');
+    // }
+    // public function uploadCropImage(Request $request)
+    // {
+    //     $folderPath = public_path('upload/');
+
+    //     $image_parts = explode(";base64,", $request->image);
+    //     $image_type_aux = explode("image/", $image_parts[0]);
+    //     $image_type = $image_type_aux[1];
+    //     $image_base64 = base64_decode($image_parts[1]);
+
+    //     $imageName = uniqid() . '.png';
+
+    //     $imageFullPath = $folderPath . $imageName;
+
+    //     file_put_contents($imageFullPath, $image_base64);
+
+    //     $saveFile = new Blog;
+    //     $saveFile->gambar = $imageName;
+    //     $saveFile->save();
+
+    //     return response()->json(['success' => 'Crop Image Uploaded Successfully']);
+    // }
 }

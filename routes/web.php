@@ -44,6 +44,9 @@ Route::middleware('auth')->group(function () {
         route::get('/del_user/{id}', [CoreController::class, 'del_user'])->name('del_user');
         route::post('/nonaktif_user/{id}', [CoreController::class, 'nonaktif_user'])->name('nonaktif_user');
         route::post('/aktif_user/{id}', [CoreController::class, 'aktif_user'])->name('aktif_user');
+        route::get('/semuaUser', [CoreController::class, 'semuaUser'])->name('semuaUser');
+        route::get('/verifikasiMentor', [CoreController::class, 'verifikasiMentor'])->name('verifikasiMentor');
+        route::get('/hapus_trainer/{crud_token}', [CoreController::class, 'hapus_trainer']);
     });
 
     // dashboard
@@ -69,8 +72,8 @@ Route::get('/login', [LoginController::class, 'login_view'])->name('login');
 Route::post('/login_portal', [LoginController::class, 'login_portal'])->name('login_portal');
 Route::get('/student', [RegisterController::class, 'student'])->name('student');
 Route::post('/create_student', [RegisterController::class, 'create_student'])->name('create_student');
+Route::get('/mentor', [RegisterController::class, 'mentor'])->name('mentor');
+Route::post('/create_mentor', [RegisterController::class, 'create_mentor'])->name('create_mentor');
 Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
-
-Route::get('/crop', [CoreController::class, 'loadImage']);
-
-Route::post('/cropImg', [CoreController::class, 'cropImg'])->name('cropImg');
+// Route::get('/crop', [CoreController::class, 'loadImage']);
+// Route::post('/cropImg', [CoreController::class, 'uploadCropImage'])->name('cropImg');

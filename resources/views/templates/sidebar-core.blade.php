@@ -1,6 +1,7 @@
 <!-- partial:partials/_sidebar.html -->
   <nav class="sidebar sidebar-offcanvas" id="sidebar" style="background: #fff;">
     <ul class="nav">
+
       {{-- dashboard --}}
       <li class="nav-item">
         <a class="nav-link" href="{{ route('dashboard') }}">
@@ -20,11 +21,37 @@
 
       {{-- semua kelas --}}
       <li class="nav-item">
-        <a class="nav-link" href="{{ route('semua-kelas') }}">
+        <a class="nav-link" href ="{{ route('semua-kelas') }}">
           <i class="menu-icon @if($title != 'Semua Kelas') text-info @endif mdi mdi-book-open-page-variant"></i>
-          <span class="menu-title">@if(auth()->user()->role == 'admin') Kelas @elseif(auth()->user()->role == 'student') Semua Kelas @endif</span>
+          <span class="menu-title">@if(auth()->user()->role == 'admin') Kelas @elseif(auth()->user()->role == 'student') Semua Kelas @elseif(auth()->user()->role == 'trainer') Kelola Kelas @endif</span>
         </a>
       </li>
+
+      
+      {{-- magang --}}
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('magang') }}">
+            <i class="menu-icon mdi mdi-microscope" style="@if($title != 'Program Magang') color:orangered @endif"></i>
+            <span class="menu-title">Program Magang</span> 
+        </a>
+      </li>
+      
+      {{-- users --}}
+      @if (auth()->user()->role == 'admin')   
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('semuaUser') }}">
+          <i class="menu-icon mdi mdi-account-multiple" style="@if($title != 'Semua User') color:#374045; @endif"></i>
+          <span class="menu-title">Semua User</span>
+        </a>
+      </li>       
+
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('verifikasiMentor') }}">
+          <i class="menu-icon mdi mdi-account-check" style="@if($title != 'Verifikasi Mentor') color:green; @endif"></i>
+          <span class="menu-title">Verifikasi Mentor</span>
+        </a>
+      </li>       
+      @endif
 
       {{-- kelas Kamu --}}
       @if (auth()->user()->role == 'student')          
@@ -36,14 +63,6 @@
         </li>
       @endif
 
-      {{-- magang --}}
-      <li class="nav-item">
-        <a class="nav-link" href="{{ route('magang') }}">
-            <i class="menu-icon mdi mdi-microscope" style="@if($title != 'Program Magang') color:orangered @endif"></i>
-            <span class="menu-title">Program Magang</span> 
-        </a>
-      </li>
-     
       @if(auth()->user()->role == 'student')
       {{-- leaderboard --}}
       <li class="nav-item nav-category">Certificate</li>
@@ -57,7 +76,7 @@
       </li>
       @endif
       
-      @if (auth()->user()->role == 'admin' || auth()->user()->role == 'bloger')
+      @if (in_array(auth()->user()->role, ['admin','trainer','bloger']))
       {{-- artikel --}}
       <li class="nav-item nav-category">News</li>
       
@@ -82,6 +101,13 @@
         <a class="nav-link" href="{{ route('profil') }}">
           <i class="menu-icon mdi mdi-account-circle-outline" style="@if($title != 'Profilku') color:#663399; @endif"></i>
           <span class="menu-title">Profilku</span>
+        </a>
+      </li>
+      
+      <li class="nav-item d-lg-none">
+        <a class="nav-link" href="{{ route('logout') }}">
+          <i class="menu-icon mdi mdi-logout" style="color:orangered;"></i>
+          <span class="menu-title">Logout</span>
         </a>
       </li>
     </ul>
